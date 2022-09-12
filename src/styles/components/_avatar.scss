@@ -1,0 +1,45 @@
+.avatar-cg {
+    border-radius: $border-radius-circle;
+    object-fit: cover;
+    object-position: center;
+
+    &.xxsmall {
+        height: $avatar-s-xxsmall;
+        width: $avatar-s-xxsmall;
+    }
+
+    &.xsmall {
+        height: $avatar-s-xsmall;
+        width: $avatar-s-xsmall;
+    }
+
+    &.small{
+        height: $avatar-s-small;
+        width: $avatar-s-small;
+    }
+
+    &.normal {
+        height: $avatar-s-normal;
+        width: $avatar-s-normal;
+    }
+
+    &.large {
+        height: $avatar-s-large;
+        width: $avatar-s-large;
+    }
+
+    &.xlarge {
+        height: $avatar-s-xlarge;
+        width: $avatar-s-xlarge;
+    }
+
+    &.xxlarge {
+        height: $avatar-s-xxlarge;
+        width: $avatar-s-xxlarge;
+    }
+
+    &.xxxlarge {
+        height: $avatar-s-xxxlarge;
+        width: $avatar-s-xxxlarge;
+    }
+}

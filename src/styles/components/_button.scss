@@ -1,0 +1,131 @@
+/**
+* @desc         button variants.
+* @requires     variables.scss
+*/
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $button-default-padding;
+  cursor: pointer;
+  @extend %ease;
+  border-radius: $border-radius-4;
+
+  &.btn-default {
+    color: $primary-light-color;
+    background-color: $white-color-1;
+    border-color: $primary-light-color;
+    width: 150px;
+    border:  2px solid;
+
+    &:hover, &.is-active {
+      background-color: $primary-hover-color;
+      color: $white-color-1;
+      box-shadow: $box-shadow-medium;
+      border-color: $primary-light-color;
+    }
+  }
+
+  &.btn-white {
+    background-color: $white-color-1;
+    gap: .5em;
+    font-size: 1.25em;
+    width: 125px;
+
+    &:hover {
+      background-color: $secondary-light-color;
+    }
+    &.is-active {
+      color: $primary-light-color;
+    }
+  }
+
+  &.btn-small {
+    width: 100px;
+  }
+}
+
+.btn-icon {
+  // padding: $button-icon-padding;
+  width: 2.5em;
+  height: 2.5em;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  @extend %ease;
+
+  &.btn-icon-default {
+    background: $secondary-light-color;
+    color: black;
+    border: none;
+
+    &:hover, &.is-active {
+      color: $primary-light-color;
+      background: $secondary-dark-color;
+      box-shadow: $box-shadow-medium;
+    }
+  }
+
+  &.btn-icon-primary {
+    background: $white-color-1;
+    color: $primary-light-color;
+    border: 2px solid $primary-light-color;
+
+    &:hover, &.is-active {
+      color: $white-color-1;
+      background-color: $primary-light-color;
+    }
+  }
+
+  &.btn-icon-exit {
+    padding: $button-icon-padding;
+    height: auto;
+    width: auto;
+    background: transparent;
+    color: $secondary-dark-color;
+
+    &:hover {
+      color: $danger-light-color;
+    }
+  }
+}
+
+.btn-nav {
+  padding: $button-nav-padding;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: $border-radius-4;
+  position: relative;
+  font-size: 1.25em;
+  margin: 0 .25em;
+  @extend %ease;
+
+  &:after {
+    @extend %nav-underline;
+  }
+
+  &.btn-nav-default {
+    color: $secondary-dark-color;
+    background: $white-color-1;
+
+    &:hover {
+      color: $primary-light-color;
+      background: $secondary-hover-color;
+      box-shadow: $box-shadow-medium;
+    }
+
+    &.is-active {
+      color: $primary-light-color;
+
+      &:after {
+        @extend %nav-underline--active;
+      }
+    }
+  }
+}
+
+

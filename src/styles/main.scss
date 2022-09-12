@@ -1,0 +1,42 @@
+@import
+  'abstracts/variables',
+  'abstracts/functions',
+  'abstracts/mixins',
+  'abstracts/placeholders';
+
+@import 'themes/theme';
+
+@import
+  'base/reset',
+  'base/typography';
+
+@import
+  'layout/header',
+  'layout/footer',
+  'layout/left-side',
+  'layout/right-side',
+  'layout/grid';
+
+ @import
+  'components/checkbox',
+  'components/button',
+  'components/icon',
+  'components/input',
+  'components/spinner',
+  'components/skeleton',
+  'components/badge',
+  'components/avatar',
+  'components/dialog',
+  'components/card',
+  'components/form',
+  'components/tooltip',
+  'components/textarea',
+  'components/select';
+
+@import
+  'pages/home-page',
+  'pages/not-found-page',
+  'pages/auth-page',
+  'pages/profile-page',
+  'pages/friend-page';
+
