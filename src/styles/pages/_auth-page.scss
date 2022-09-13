@@ -1,24 +1,26 @@
 .auth {
-    height: 100vh;
-    width: 100vw;
+  height: 100vh;
+  width: 100vw;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  &__content {
+    position: absolute;
     display: flex;
+    justify-content: center;
     align-items: center;
+    height: 50%;
+    width: 100%;
+    background-image: url(assets/background.jpg);
+    top: 0;
+    color: white;
+  }
 
-    &__content {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-        width: 50%;
-        background:linear-gradient(to right, rgb(0, 38, 255), white);
-    }
-
-    &__container {
-        
-        & > button {
-            position: absolute;
-            top: 50%;
-            right: 1em;
-        }
-    }
+  &__container {
+    background-color: $body-background;
+    z-index: 1;
+    border-radius: 0.5rem;
+    transform: translateY(4rem);
+  }
 }

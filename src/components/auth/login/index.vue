@@ -1,5 +1,8 @@
 <template>
     <div class='form-cg'>
+        <div class="form-cg__content">
+            <h2>Welcome, Loggin now!</h2>
+        </div>
         <div class="input-cg">
             <input type='text' name='email' v-model="data.email" required placeholder=" " />
             <label htmlFor="email">
