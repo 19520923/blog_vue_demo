@@ -3,11 +3,11 @@
 
         <div class="card__title">
             <div>
-                <img class='avatar-cg large' src='../../assets/background.jpg'
+                <img class="avatar-cg large" :src="post.author.avatar_url"
                     alt="avatar" />
                 <div>
-                    <h6>Nguyen Nhut Tan</h6>
-                    <span>12h ago</span>
+                    <h6>{{post.author.name}}</h6>
+                    <span>{{formatedTime(post.created_at)}}</span>
                 </div>
             </div>
 
@@ -17,15 +17,15 @@
         </div>
 
         <div class="card__content">
-            <PostContent />
+            <PostContent :content = "post.content" :image="post.photos[0]"/>
         </div>
 
         <div class="card__footer">
-            <PostFooter />
+            <PostFooter :num_comment="post.num_comment" :num_like="post.reactions.length"/>
         </div>
 
         <div class='card__actions'>
-            <PostAction />
+            <PostAction :post="post"/>
         </div>
 
         <!-- {isCommentOpen&&<div class = 'card__comments'>
@@ -39,8 +39,17 @@
 import PostContent from './PostContent.vue';
 import PostFooter from './PostFooter.vue';
 import PostAction from './PostAction.vue';
+import moment from 'moment'
 export default {
-    components: { PostContent, PostFooter, PostAction }
+    props: {
+        post: Object
+    },
+    components: { PostContent, PostFooter, PostAction },
+    methods: {
+        formatedTime(datetime) {
+            return moment().fromNow(datetime)
+        }
+    }
 }
 </script>
 

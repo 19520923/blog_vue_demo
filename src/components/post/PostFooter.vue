@@ -2,19 +2,13 @@
     <div>
         <div class="footer-left">
             <i class='fas fa-thumbs-up'></i>
-            <!-- {filterLike().length === 0 ? -->
             <span>
-                Give the first like
+                {{getNumLike()}}
             </span>
-            <!-- <span>
-                <span>{filterLike()[0].name} {filterLike().length > 1 && `and ${filterLike().length - 1} other
-                    people`}</span>
-            </span>
-            } -->
         </div>
         <div class="footer-right">
             <span>
-                No comments
+                {{`${num_comment} comments`}}
             </span>
             <span>
                 No shares
@@ -26,6 +20,15 @@
 <script>
 import LikePost from "./LikePost.vue";
 export default {
-    components: { LikePost }
+    props: {
+        num_comment: Number,
+        num_like: Number
+    },
+    components: { LikePost },
+    methods: {
+        getNumLike() {
+            return this.num_like === 0 && this.num_like ? 'Give first like' : this.num_like 
+        }
+    }
 }
 </script>

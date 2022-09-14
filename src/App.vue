@@ -1,17 +1,25 @@
 <template>
-    <router-view/>
+    <HeaderNav v-show="isLoggedIn" :user="user" :noti = "noti"/>
+    <router-view />
 </template>
 
 <script>
-import Auth from './screen/Auth.vue';
-import LikePost from './components/post/LikePost.vue';
-import PostFooter from './components/post/PostFooter.vue';
-import Post from './components/post/Post.vue';
+import HeaderNav from './components/nav/HeaderNav.vue';
+import { useUserStore } from '@/store/user'
+import { computed } from '@vue/reactivity';
+import { onMounted } from 'vue';
 
 export default {
+    setup() {
+        const store = useUserStore()
+        onMounted(() => store.fetchNoti(1, 10))
+        return { isLoggedIn: computed(() => store.isLoggedIn), user: computed(() => store.user), noti: computed(()=> store.notifications)}
+    },
+
     data() {
     },
-    components: { Auth, LikePost, PostFooter, Post }
+
+    components: { HeaderNav }
 }
 </script>
 

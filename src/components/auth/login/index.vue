@@ -27,12 +27,12 @@
 
 <script>
 import { computed } from '@vue/reactivity'
-import {useUserStore} from '../../../store/user'
+import { useUserStore } from '../../../store/user'
 
 export default {
     setup() {
         const store = useUserStore()
-        return {isLoggedIn: computed(()=> store.isLoggedIn), login: store.login}
+        return { isLoggedIn: computed(() => store.isLoggedIn), login: store.login }
     },
     data() {
         return {
@@ -46,7 +46,7 @@ export default {
     methods: {
         onSubmit() {
             this.loading = true
-            this.login(this.data)
+            this.login(this.data, this.$router)
         }
     }
 }

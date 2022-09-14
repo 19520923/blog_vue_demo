@@ -5,6 +5,8 @@ export const useUserStore = defineStore("user", {
   state: () => ({
     isLoggedIn: false,
     token: "",
+    user: {},
+    notifications: [],
   }),
   getters: {
     getIsLoggedIn(state) {
@@ -15,9 +17,8 @@ export const useUserStore = defineStore("user", {
     },
   },
   actions: {
-    async login(data) {
+    async login(data, router) {
       try {
-        console.log(data);
         const response = await axios.post(
           "https://foodtalk-server.herokuapp.com/auth",
           { access_token: "http://0.0.0.0:9000" },
@@ -28,15 +29,35 @@ export const useUserStore = defineStore("user", {
             },
           }
         );
-        axios.defaults.headers.common[
-          "Authorization"
-        ] = `Bearer ${response.data.token}`;
+        if (response.data) {
+          axios.defaults.headers.common[
+            "Authorization"
+          ] = `Bearer ${response.data.token}`;
 
-        this.isLoggedIn = true;
+          this.isLoggedIn = true;
+          this.user = response.data.user;
+          router.replace("/home");
+        }
       } catch (err) {
-        console.log(err)
+        console.log(err);
         if (err.response) console.log(err.response.data);
       }
     },
+
+    async fetchNoti(page, limit) {
+      try {
+        const response = await axios.get(
+          `https://foodtalk-server.herokuapp.com/notifications?page=${page}&limit=${limit}`
+        );
+        if (response.data) {
+          this.notifications = response.data.rows;
+        }
+      } catch (err) {
+        console.log(err);
+        if (err.response) console.log(err.response.data);
+      }
+    },
+
+    
   },
 });

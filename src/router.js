@@ -1,26 +1,56 @@
 import { createRouter, createWebHistory } from "vue-router";
-import Auth from '@/screen/Auth.vue'
-import Post from '@/components/post/Post.vue'
-
+import Auth from "@/screen/Auth.vue";
+import Home from "@/screen/Home.vue";
+import Post from "@/components/post/Post.vue";
+import { useUserStore } from "./store/user";
+import { computed } from "vue";
 
 const routers = [
-    {
-        path: '/',
-        component: Auth
-    },
-    {
-        path: '/home',
-        component: Post
-    },
-    {
-        path: '/:catchAll(.*)',
-        component: Auth
-    },
-]
+  {
+    path: "/login",
+    component: Auth,
+  },
+  {
+    path: "/home",
+    name: "home",
+    component: Home,
+  },
+  {
+    path: "/friends",
+    name: "friends",
+    component: Post,
+  },
+  {
+    path: "/watch",
+    name: "watch",
+    component: Post,
+  },
+  {
+    path: "/market",
+    name: "market",
+    component: Post,
+  },
+  {
+    path: "/:catchAll(.*)",
+    component: Home,
+  },
+];
 
 const router = createRouter({
-    history: createWebHistory(),
-    routes: routers
-})
+  history: createWebHistory(),
+  routes: routers,
+});
 
-export default router
+router.beforeEach(async (to) => {
+  // redirect to login page if not logged in and trying to access a restricted page
+  const publicPages = ["/login"];
+  const authRequired = !publicPages.includes(to.path);
+  const store = useUserStore();
+  const isLoggedIn = computed(()=> store.isLoggedIn)
+
+  if (authRequired && !isLoggedIn) {
+    return "/login";
+  } 
+});
+
+export default router;

@@ -1,5 +1,5 @@
 <template>
-    <LikePost />
+    <LikePost :post="post"/>
     <div class='btn btn-white'>
         <i class='fas fa-comment'></i>
         <span>
@@ -17,6 +17,9 @@
 <script>
 import LikePost from './LikePost.vue';
 export default {
+    props: {
+        post: Object
+    },
     components: { LikePost }
 }
 </script>
