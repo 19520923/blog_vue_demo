@@ -56,8 +56,6 @@ export const useUserStore = defineStore("user", {
         console.log(err);
         if (err.response) console.log(err.response.data);
       }
-    },
-
-    
+    }, 
   },
 });

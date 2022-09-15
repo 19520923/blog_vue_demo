@@ -11,6 +11,10 @@ const routers = [
     component: Auth,
   },
   {
+    path: "/",
+    redirect: "/home",
+  },
+  {
     path: "/home",
     name: "home",
     component: Home,
@@ -46,11 +50,11 @@ router.beforeEach(async (to) => {
   const publicPages = ["/login"];
   const authRequired = !publicPages.includes(to.path);
   const store = useUserStore();
-  const isLoggedIn = computed(()=> store.isLoggedIn)
+  const isLoggedIn = computed(() => store.isLoggedIn);
 
-  if (authRequired && !isLoggedIn) {
+  if (authRequired && isLoggedIn) {
     return "/login";
-  } 
+  }
 });
 
 export default router;
