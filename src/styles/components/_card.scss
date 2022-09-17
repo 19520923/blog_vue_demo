@@ -41,10 +41,10 @@
 
     &__content {
         width: 100%;
-        overflow: auto;
         display: flex;
         flex-direction: column;
         gap: .5em;
+        overflow: auto;
         @extend %ease;
 
         & > form {

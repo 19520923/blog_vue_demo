@@ -5,7 +5,7 @@
             Like
         </span>
     </div>
-    
+
 </template>
 
 <script>
@@ -17,20 +17,25 @@ export default {
     setup() {
         const store = useUserStore()
         const post = usePostStore()
-        return { user: computed(() => store.user), like: post.like }
+        return { user: computed(() => store.user), like: post.like, unLike: post.unLike }
     },
     props: {
         post: Object
     },
     methods: {
+        getLiked() {
+            return this.post.reactions.includes(this.user._id)
+        },
         getClass() {
             return {
-                'btn btn-white is-active': this.post.reactions.includes(this.user._id),
-                'btn btn-white': !this.post.reactions.includes(this.user._id)
+                'btn btn-white is-active': this.getLiked(),
+                'btn btn-white': !this.getLiked()
             }
         },
-        likeUnLike(){
-            this.like(this.post._id, this.user._id)
+        likeUnLike() {
+            if (!this.getLiked())
+                this.like(this.post._id, this.user._id)
+            else this.unLike(this.post._id, this.user._id)
         }
     }
 }

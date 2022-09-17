@@ -3,9 +3,9 @@
         <div :class="getClass()" data-c-tooltip='Notifications' tooltip-position='bottom' v-click-out-side="clickOutside"
             @click="clickInside">
             <i class="fa-solid fa-bell"></i>
-            <div class='badge'>
+            <div v-if="this.unSeen.length !== 0" class='badge'>
                 <span>
-                    9
+                    {{this.unSeen().length}}
                 </span>
             </div>
         </div>
@@ -59,6 +59,9 @@ export default {
         },
         clickInside() {
             this.open = !this.open
+        },
+        unSeen(){
+            return this.notifications.filter(n => n.is_seen === false)
         }
 
     }

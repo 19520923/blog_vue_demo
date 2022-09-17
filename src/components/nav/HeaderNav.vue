@@ -12,51 +12,26 @@
             <router-link class="link" to='/home'>
                 <div v-bind:class="getClass('home')">
                     <i class="fas fa-home"></i>
-                    <div className='badge'>
-                        <span>
-                            9
-                        </span>
-                    </div>
                 </div>
             </router-link>
             <router-link class="link" to='/friends'>
                 <div v-bind:class="getClass('friends')">
                     <i class="fas fa-user-friends"></i>
-                    <div className='badge'>
-                        <span>
-                            9
-                        </span>
-                    </div>
                 </div>
             </router-link>
             <router-link class="link" to='/watch'>
                 <div v-bind:class="getClass('watch')">
                     <i class="fas fa-tv"></i>
-                    <div className='badge'>
-                        <span>
-                            9
-                        </span>
-                    </div>
                 </div>
             </router-link>
             <router-link class="link" to='/market'>
                 <div v-bind:class="getClass('market')">
                     <i class="fas fa-store"></i>
-                    <div className='badge'>
-                        <span>
-                            9
-                        </span>
-                    </div>
                 </div>
             </router-link>
             <router-link class="link" to='/groups'>
                 <div class='btn-nav btn-nav-default'>
                     <i class="fas fa-users"></i>
-                    <div class='badge'>
-                        <span>
-                            9
-                        </span>
-                    </div>
                 </div>
             </router-link>
         </div>
@@ -80,7 +55,7 @@
 
             <NotificationMenu :notifications="noti"/>
 
-            <div class='btn-icon btn-icon-default'>
+            <div class='btn-icon btn-icon-default' @click="handleLogout">
                 <i class="fas fa-caret-down"></i>
             </div>
         </div>
@@ -88,8 +63,15 @@
 </template>
 
 <script>
+import { useUserStore } from '@/store/user';
 import NotificationMenu from '../notification/NotificationMenu.vue';
 export default {
+    setup() {
+        const store = useUserStore()
+        return {
+            logout: store.logout
+        }
+    },
     props: {
         user: {
             type: Object,
@@ -107,6 +89,11 @@ export default {
                 "btn-nav btn-nav-default is-active": this.$route.name === property,
                 "btn-nav btn-nav-default": this.$route.name !== property
             };
+        },
+
+        handleLogout () {
+            this.logout()
+            this.$router.replace('/login')
         }
     },
     components: { NotificationMenu }

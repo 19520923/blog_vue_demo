@@ -25,19 +25,56 @@ export const usePostStore = defineStore("post", {
       }
     },
 
-    async like(id, user_id){
-        try {
-          const index = this.posts.findIndex(p => p._id === id)
-          this.posts[index].num_heart++
-          this.posts[index].reactions.push(user_id)
-          const response = await axios.post(`https://foodtalk-server.herokuapp.com/posts/${id}/likeDislike`)
-          if (response.data) {
-            console.log(response.data);
-          }
-        } catch (err) {
-          console.log(err);
-          if (err.response) console.log(err.response.data);
+    async like(id, user_id) {
+      try {
+        const index = this.posts.findIndex((p) => p._id === id);
+        this.posts[index].num_heart++;
+        this.posts[index].reactions.push(user_id);
+        const response = await axios.post(
+          `https://foodtalk-server.herokuapp.com/posts/${id}/likeDislike`
+        );
+        if (response.data) {
+          console.log(response.data);
         }
+      } catch (err) {
+        console.log(err);
+        if (err.response) console.log(err.response.data);
       }
+    },
+
+    async unLike(id, user_id) {
+      try {
+        const index = this.posts.findIndex((p) => p._id === id);
+        this.posts[index].num_heart--;
+        this.posts[index].reactions = this.posts[index].reactions.filter(
+          (reaction) => reaction !== user_id
+        );
+        const response = await axios.post(
+          `https://foodtalk-server.herokuapp.com/posts/${id}/likeDislike`
+        );
+        if (response.data) {
+          console.log(response.data);
+        }
+      } catch (err) {
+        console.log(err);
+        if (err.response) console.log(err.response.data);
+      }
+    },
+
+    async create(payload) {
+      try {
+        const response = await axios.post(
+          `https://foodtalk-server.herokuapp.com/posts`,
+          payload
+        );
+        if (response.data) {
+          this.posts.push(response.data);
+        }
+      } catch (err) {
+        console.log(err);
+        if (err.response) console.log(err.response.data);
+      }
+    },
   },
+  persist: true
 });

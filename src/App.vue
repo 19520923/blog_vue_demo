@@ -8,6 +8,7 @@ import HeaderNav from './components/nav/HeaderNav.vue';
 import { useUserStore } from '@/store/user'
 import { computed } from '@vue/reactivity';
 import { onMounted } from 'vue';
+import Home from './screen/Home.vue';
 
 export default {
     setup() {
@@ -16,10 +17,7 @@ export default {
         return { isLoggedIn: computed(() => store.isLoggedIn), user: computed(() => store.user), noti: computed(()=> store.notifications)}
     },
 
-    data() {
-    },
-
-    components: { HeaderNav }
+    components: { HeaderNav, Home }
 }
 </script>
 

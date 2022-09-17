@@ -36,12 +36,19 @@ export const useUserStore = defineStore("user", {
 
           this.isLoggedIn = true;
           this.user = response.data.user;
-          router.replace("/home");
+          router.push({ path: "/home", replace: true });
         }
       } catch (err) {
         console.log(err);
         if (err.response) console.log(err.response.data);
       }
+    },
+
+    logout() {
+      this.isLoggedIn = false;
+      this.token = "";
+      this.user = {};
+      this.notifications = [];
     },
 
     async fetchNoti(page, limit) {
@@ -56,6 +63,8 @@ export const useUserStore = defineStore("user", {
         console.log(err);
         if (err.response) console.log(err.response.data);
       }
-    }, 
+    },
   },
+
+  persist: true,
 });

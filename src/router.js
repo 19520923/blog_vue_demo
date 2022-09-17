@@ -22,17 +22,17 @@ const routers = [
   {
     path: "/friends",
     name: "friends",
-    component: Post,
+    component: Home,
   },
   {
     path: "/watch",
     name: "watch",
-    component: Post,
+    component: Home,
   },
   {
     path: "/market",
     name: "market",
-    component: Post,
+    component: Home,
   },
   {
     path: "/:catchAll(.*)",
@@ -50,9 +50,8 @@ router.beforeEach(async (to) => {
   const publicPages = ["/login"];
   const authRequired = !publicPages.includes(to.path);
   const store = useUserStore();
-  const isLoggedIn = computed(() => store.isLoggedIn);
 
-  if (authRequired && isLoggedIn) {
+  if (authRequired && !store.isLoggedIn) {
     return "/login";
   }
 });
