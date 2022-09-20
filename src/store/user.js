@@ -7,6 +7,8 @@ export const useUserStore = defineStore("user", {
     token: "",
     user: {},
     notifications: [],
+    search: [],
+    currentUser: {}
   }),
   getters: {
     getIsLoggedIn(state) {
@@ -30,10 +32,7 @@ export const useUserStore = defineStore("user", {
           }
         );
         if (response.data) {
-          axios.defaults.headers.common[
-            "Authorization"
-          ] = `Bearer ${response.data.token}`;
-
+          this.token = response.data.token
           this.isLoggedIn = true;
           this.user = response.data.user;
           router.push({ path: "/home", replace: true });
@@ -57,12 +56,30 @@ export const useUserStore = defineStore("user", {
           `https://foodtalk-server.herokuapp.com/notifications?page=${page}&limit=${limit}`
         );
         if (response.data) {
+          console.log(response.data);
           this.notifications = response.data.rows;
         }
       } catch (err) {
         console.log(err);
         if (err.response) console.log(err.response.data);
       }
+    },
+
+    async searchFriend(key){
+      try {
+        const response = await axios
+        .get(`https://foodtalk-server.herokuapp.com/users?q=${key}&page=1&limit=20`)
+        if (response.data) {
+          this.search = response.data.rows;
+        }
+      } catch (err) {
+        console.log(err);
+        if (err.response) console.log(err.response.data);
+      }
+    },
+
+    async setCurrentUser(user){
+      this.currentUser = user
     },
   },
 

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Auth from "@/screen/Auth.vue";
 import Home from "@/screen/Home.vue";
+import Profile from "@/screen/Profile.vue";
 import Post from "@/components/post/Post.vue";
 import { useUserStore } from "./store/user";
 import { computed } from "vue";
@@ -33,6 +34,11 @@ const routers = [
     path: "/market",
     name: "market",
     component: Home,
+  },
+  {
+    path: "/profile/:user_id",
+    name: "profile",
+    component: Profile,
   },
   {
     path: "/:catchAll(.*)",

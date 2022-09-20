@@ -1,6 +1,6 @@
 <template>
-    <div class='header__notification'>
-        <div :class="getClass()" data-c-tooltip='Notifications' tooltip-position='bottom' v-click-out-side="clickOutside"
+    <div class='header__notification' v-click-out-side="clickOutside">
+        <div :class="getClass()" data-c-tooltip='Notifications' tooltip-position='bottom'
             @click="clickInside">
             <i class="fa-solid fa-bell"></i>
             <div v-if="this.unSeen.length !== 0" class='badge'>
@@ -9,17 +9,17 @@
                 </span>
             </div>
         </div>
-        <div v-if="open" class="card-cg">
+        <div   v-if="open" class="card-cg">
 
             <i v-if="notifications.length===0" class='fas fa-comment-slash'></i>
 
             <ul v-else>
                 <li v-for="notification in notifications" :key="notification._id">
-                    <img :src="notification.author.avatar_url" alt="" class='avatar-cg xlarge' />
+                    <Avatar size="xlarge" :user="notification.author"/>
                     <div class="item-body">
-                        <h6>
+                        <span>
                             {{notification.content}}
-                        </h6>
+                        </span>
                         <span>{{formatedTime(notification.created_at)}}</span>
                     </div>
                 </li>
@@ -31,6 +31,7 @@
 <script>
 import moment from 'moment';
 import clickOutSide from "@mahdikhashan/vue3-click-outside";
+import Avatar from '../avatar/Avatar.vue';
 
 export default {
     props: {
@@ -42,28 +43,28 @@ export default {
     data() {
         return {
             open: false
-        }
+        };
     },
     methods: {
         formatedTime(datetime) {
-            return moment().fromNow(datetime)
+            return moment(datetime).fromNow();
         },
         getClass() {
             return {
-                'btn-icon btn-icon-default is-active': this.open,
-                'btn-icon btn-icon-default': !this.open
-            }
+                "btn-icon btn-icon-default is-active": this.open,
+                "btn-icon btn-icon-default": !this.open
+            };
         },
         clickOutside() {
-            this.open = false
+            this.open = false;
         },
         clickInside() {
-            this.open = !this.open
+            this.open = !this.open;
         },
-        unSeen(){
-            return this.notifications.filter(n => n.is_seen === false)
+        unSeen() {
+            return this.notifications.filter(n => n.is_seen === false);
         }
-
-    }
+    },
+    components: { Avatar }
 }
 </script>

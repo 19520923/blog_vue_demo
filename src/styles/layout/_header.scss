@@ -4,93 +4,91 @@
 */
 
 .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: $white-color-1;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  padding: 0.25em 0.5em;
+  height: $header-default-height;
+
+  &__wrapper {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    background: $white-color-1;
-    position: sticky;
-    top: 0;
-    z-index: 9999;
-    padding: .25em .5em;
-    height: $header-default-height;
+    justify-content: space-between;
 
-    &__wrapper {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+    &.side {
+      width: $header-side-width;
+    }
+  }
 
-        &.side {
-            width: $header-side-width;
-        }
+  &__avatar {
+    display: flex;
+    align-items: center;
+    padding: 0.25em 0.25em;
+    border-radius: $border-radius-5;
+
+    &:hover,
+    &.active {
+      background: $secondary-hover-color;
+      color: $primary-light-color;
+      box-shadow: $box-shadow-medium;
+
+      & > span {
+        color: $primary-light-color;
+      }
     }
 
-    &__avatar {
-        display: flex;
-        align-items: center;
-        padding: .25em .25em;
-        border-radius: $border-radius-5;
+    & > span {
+      color: black;
+      font-weight: $font-w-semi-bold;
+      padding: 0 0.5em;
+    }
+  }
 
-        &:hover, &.active {
-            background: $secondary-hover-color;
+  &__search {
+    .card-cg {
+      &.active {
+        position: absolute;
+        top: 0;
+        left: 0;
+        box-shadow: $box-shadow-medium;
+
+        .input-placeholder {
+          border: 2px solid $primary-light-color;
+          &:before {
             color: $primary-light-color;
-            box-shadow: $box-shadow-medium;
+          }
+        }
+      }
 
-            & > span {
-                color: $primary-light-color;
-            }
+      .input-placeholder {
+        &:before {
+          content: "\f002";
+          font-family: "Font Awesome 5 Free";
+          font-weight: 900;
+          padding: 0 0.5em;
+          color: $secondary-dark-color;
         }
-        
-        & > span {
-            color: black;
-            font-weight: $font-w-semi-bold;
-            padding: 0 .5em;
-        }
+      }
+    }
+    .search-friends__body {
+      margin-top: 1em;
+    }
+  }
+
+  &__notification {
+    .btn {
+      position: relative;
     }
 
-    &__search {
-        .card-cg {
-            &.active {
-                position: absolute;
-                top:0;
-                left:0;
-                box-shadow: $box-shadow-medium;
-
-                .input-placeholder{
-                    border: 2px solid $primary-light-color;
-                    &:before {
-                        color: $primary-light-color;
-                    }
-                }
-            }
-
-            .input-placeholder {
-
-                &:before {
-                    content: '\f002';
-                    font-family: 'Font Awesome 5 Free';
-                    font-weight: 900;
-                    padding: 0 0.5em;
-                    color: $secondary-dark-color;
-               }
-            }
-        }
-            .search-friends__body {
-                margin-top: 1em;   
-            }
-        
+    .card-cg {
+      position: absolute;
+      top: 60px;
+      right: 1em;
+      box-shadow: $box-shadow-medium;
     }
-
-    &__notification {
-        .btn {
-            position: relative;
-        }
-
-        .card-cg {
-            position: absolute;
-            top: 60px;
-            right: 1em;
-            box-shadow: $box-shadow-medium;
-        }
-    }
-
+  }
 }

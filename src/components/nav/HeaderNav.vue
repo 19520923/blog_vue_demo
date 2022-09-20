@@ -5,7 +5,7 @@
                 <i class="icon-cg md fab fa-facebook"></i>
             </router-link>
             <div class="header__search">
-                <!-- <SearchFriends/>                     -->
+                <SearchFriend/>                    
             </div>
         </div>
         <div class="header__wrapper">
@@ -36,14 +36,12 @@
             </router-link>
         </div>
         <div class="header__wrapper side">
-            <router-link class="link" to="/home">
-                <div class='header__avatar'>
+                <div class='header__avatar' @click = "profileClick">
                     <img :src="user.avatar_url" class="avatar-cg large" alt='avatar' />
                     <span>
                         {{user.name}}
                     </span>
                 </div>
-            </router-link>
             <!-- <div class='btn-icon btn-icon-default'>
                 <i class="fab fa-facebook-messenger"></i>
                 <div class='badge'>
@@ -65,11 +63,16 @@
 <script>
 import { useUserStore } from '@/store/user';
 import NotificationMenu from '../notification/NotificationMenu.vue';
+import SearchFriend from '../friend/SearchFriend.vue';
+import { usePostStore } from '@/store/post';
 export default {
     setup() {
-        const store = useUserStore()
+        const userStore = useUserStore()
+        const postStore = usePostStore()
         return {
-            logout: store.logout
+            logout: userStore.logout,
+            setCurrentUser: userStore.setCurrentUser,
+            delete: postStore.delete
         }
     },
     props: {
@@ -93,9 +96,14 @@ export default {
 
         handleLogout () {
             this.logout()
+            this.delete()
             this.$router.replace('/login')
+        },
+        profileClick(){
+            this.setCurrentUser(this.user)
+            this.$router.push({name: "profile", params: {user_id: this.user._id}})
         }
     },
-    components: { NotificationMenu }
+    components: { NotificationMenu, SearchFriend }
 }
 </script>
