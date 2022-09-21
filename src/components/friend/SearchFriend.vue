@@ -7,7 +7,7 @@
         <div v-if="this.isOpen&&this.loading" class='search-friends__body'>Loading...</div>
         <div v-if="this.isOpen" class='search-friends__body'>
             <ul>
-                <li v-for="friend in this.friends" :key="friend._id">
+                <li v-for="friend in this.friends" :key="friend._id" @click="handleClick(friend)">
                     <img :src="friend.avatar_url" :alt="friend.name" class='avatar-cg large' />
                     <div class="item-body">
                         <span>{{friend.name}}</span>
@@ -27,7 +27,7 @@ import clickOutSide from "@mahdikhashan/vue3-click-outside";
 export default {
     setup() {
         const userStore = useUserStore()
-        return { friends: computed(() => userStore.search), search: userStore.searchFriend }
+        return { friends: computed(() => userStore.search), search: userStore.searchFriend, setCurrentUser: userStore.setCurrentUser }
     },
     directives: {
         clickOutSide,
@@ -53,6 +53,10 @@ export default {
                 "card-cg": !this.isOpen,
                 "card-cg active": this.isOpen
             }
+        },
+        handleClick(user){
+            this.setCurrentUser(user)
+            this.$router.push({name: "profile", params: {user_id: user._id}})
         }
     }
 }

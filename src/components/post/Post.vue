@@ -1,6 +1,5 @@
 <template>
     <div class="card card-post">
-
         <div class="card__title">
             <div>
                 <Avatar size="large" :user="this.post.author"/>
@@ -10,8 +9,10 @@
                 </div>
             </div>
 
-            <div class='btn-icon btn-icon-exit'>
-                <i class='fas fa-ellipsis-v'></i>
+            <div v-if="!isFollowing" class='btn-icon btn-icon-exit'>
+                <span>
+                    Follow
+                </span>
             </div>
         </div>
 
@@ -47,11 +48,16 @@ import Comment from '../comment/Comment.vue';
 import { computed } from '@vue/reactivity';
 import ComentText from '../comment/ComentText.vue';
 import Avatar from '../avatar/Avatar.vue';
+import { useUserStore } from '@/store/user';
 export default {
     setup() {
         const postStore = usePostStore()
+        const userStore = useUserStore()
+
         return {
-            comments: computed(() => postStore.comments), setComments: postStore.setComments
+            comments: computed(() => postStore.comments),
+            setComments: postStore.setComments,
+            user: computed(()=> userStore.user)
         }
     },
     data() {
@@ -78,6 +84,10 @@ export default {
                 this.setComments(this.post._id)
             }
         },
+        isFollowing(){
+            const index = this.user.following.findIndex(f => f._id === this.post.author._id)
+            return index !== -1 || this.user._id === this.post.author._id
+        }
     }
 }
 </script>
