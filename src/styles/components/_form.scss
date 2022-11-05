@@ -12,4 +12,9 @@
     box-shadow: $box-shadow-medium;
     width: 400px;
     height: 300px;
+    color: $primary-dark-color;
+
+    &>.btn {
+        margin-top: 1rem;
+    }
 }

@@ -41,10 +41,10 @@
 
     &__content {
         width: 100%;
-        overflow: auto;
         display: flex;
         flex-direction: column;
         gap: .5em;
+        overflow: auto;
         @extend %ease;
 
         & > form {
@@ -91,9 +91,23 @@
     }
 
     &__comments {
-        .post-comment-textarea {
+        .post-comment-textarea, .comment, .comment__header {
             display: flex;
-            
+            align-items: center;
+            gap: .5rem;
+        };
+
+        .comment{
+            margin-bottom: .5rem;
+            &__header {
+                span:first-child{
+                    font-weight: bold;
+                }
+            }
+        }
+        
+        .text-area {
+            align-items: center;
         }
     }
 }
@@ -105,6 +119,7 @@
     background: $white-color-1;
     border-radius: $border-radius-4;
     @extend %ease;
+    overflow: auto;
 
     li {
         padding: $card-default-padding;
@@ -119,6 +134,7 @@
             flex-direction: column;
             padding-left: 0.75em;
             color: black;
+            font-size: small;
 
             span:first-child {
                 font-weight: $font-w-semi-bold;
