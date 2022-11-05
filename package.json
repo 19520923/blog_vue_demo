@@ -17,6 +17,7 @@
     "pinia": "^2.0.22",
     "pinia-plugin-persistedstate": "^2.2.0",
     "sass-loader": "^13.0.2",
+    "socket.io-client": "^4.5.2",
     "style-loader": "^3.3.1",
     "vue": "^3.2.13",
     "vue-router": "^4.0.13"

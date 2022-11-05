@@ -13,6 +13,7 @@ import { onMounted, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
 import Post from '@/components/post/Post.vue';
 import { usePostStore } from '@/store/post';
+import Right from '@/components/nav/Right.vue';
 export default {
     setup() {
         const postStore = usePostStore()
@@ -41,6 +42,6 @@ export default {
 
     },
 
-    components: { ProfileHeader, Post }
+    components: { ProfileHeader, Post, Right }
 }
 </script>

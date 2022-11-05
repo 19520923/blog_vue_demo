@@ -168,9 +168,9 @@ export const usePostStore = defineStore("post", {
 
     async like(id, user_id) {
       try {
-        const index = this.posts.findIndex((p) => p._id === id);
-        this.posts[index].num_heart++;
-        this.posts[index].reactions.push(user_id);
+        const index = this.posts.rows.findIndex((p) => p._id === id);
+        this.posts.rows[index].num_heart++;
+        this.posts.rows[index].reactions.push(user_id);
         const response = await axios.post(
           `https://foodtalk-server.herokuapp.com/posts/${id}/likeDislike`
         );
@@ -185,9 +185,9 @@ export const usePostStore = defineStore("post", {
 
     async unLike(id, user_id) {
       try {
-        const index = this.posts.findIndex((p) => p._id === id);
-        this.posts[index].num_heart--;
-        this.posts[index].reactions = this.posts[index].reactions.filter(
+        const index = this.posts.rows.findIndex((p) => p._id === id);
+        this.posts.rows[index].num_heart--;
+        this.posts.rows[index].reactions = this.posts[index].reactions.filter(
           (reaction) => reaction !== user_id
         );
         const response = await axios.post(
@@ -209,7 +209,7 @@ export const usePostStore = defineStore("post", {
           payload
         );
         if (response.data) {
-          this.posts.push(response.data);
+          this.posts.rows.push(response.data);
         }
       } catch (err) {
         console.log(err);
@@ -237,6 +237,22 @@ export const usePostStore = defineStore("post", {
         rows: [],
       };
     },
+
+    addPost(post) {
+      this.posts.rows.unshift(post);
+      this.posts.count++;
+    },
+
+    addComment(comment) {
+      const index = this.comments.findIndex((c) => c.post === comment.post);
+      this.comments[index].rows.push(comment);
+      this.comments[index].count++;
+    },
+
+    addLike(post) {
+      const index = this.posts.rows.findIndex(p => p._id === post._id)
+      this.posts.rows[index].reactions = post.reactions
+    }
   },
   persist: true,
 });

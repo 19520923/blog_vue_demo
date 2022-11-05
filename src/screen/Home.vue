@@ -3,6 +3,7 @@
         <FormCard />
         <Post v-for="post in this.posts.rows" :post="post" :key="post._id" />
     </div>
+    <Right :user="this.user"/>
 </template>
 
 <script>
@@ -11,13 +12,18 @@ import FormCard from '@/components/post/createPost/FormCard.vue';
 import { computed } from '@vue/reactivity';
 import { usePostStore } from '@/store/post'
 import { useUserStore } from '@/store/user';
+import Right from '@/components/nav/Right.vue';
 
 export default {
     setup() {
         const post = usePostStore()
         const user = useUserStore()
 
-        return { posts: computed(() => post.posts), setPosts: post.setPosts, fetchNoti: user.fetchNoti, fetchPosts: post.fetchPosts }
+        return { posts: computed(() => post.posts),
+            user: computed(()=> user.user), 
+            setPosts: post.setPosts, 
+            fetchNoti: user.fetchNoti, 
+            fetchPosts: post.fetchPosts }
     },
     mounted() {
         this.setPosts()
@@ -29,7 +35,7 @@ export default {
             }
         })
     },
-    components: { Post, FormCard },
+    components: { Post, FormCard, Right },
 
 }
 </script>

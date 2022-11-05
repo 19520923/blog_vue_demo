@@ -31,11 +31,11 @@ export default {
     props: ['post'],
     methods: {
         createComment(){
-            this.commentText = ''
             this.create({
                 post: this.post._id,
                 content: this.commentText
             })
+            this.commentText = ''
         }
     }
 }

@@ -78,9 +78,13 @@ export const useUserStore = defineStore("user", {
       }
     },
 
-    async setCurrentUser(user){
+    setCurrentUser(user){
       this.currentUser = user
     },
+
+    addNoti(noti){
+      this.notifications.unshift(noti)
+    }
   },
 
   persist: true,

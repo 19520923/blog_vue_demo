@@ -33,16 +33,10 @@
 </template>
 
 <script>
-import { useUserStore } from '@/store/user';
 import Avatar from '../avatar/Avatar.vue';
 
 export default {
-    setup() {
-        const userStore = useUserStore();
-        return {
-            user: userStore.user
-        };
-    },
+    props: ["user"],
     methods: {
         getFriend() {
             return [...this.user.following, ...this.user.follower];
